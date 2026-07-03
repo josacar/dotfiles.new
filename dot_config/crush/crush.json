@@ -8,7 +8,7 @@
   "providers": {
     "bifrost": {
       "type": "openai-compat",
-      "base_url": "http://rock-3a:8080/v1",
+      "base_url": "https://bifrost.hackinblack.es/v1",
       "api_key": "dummy",
       "models": [
         {

@@ -5,7 +5,7 @@
     "bifrost": {
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://rock-3a:8080/v1",
+        "baseURL": "https://bifrost.hackinblack.es/v1",
         "apiKey": "dummy"
       },
       "models": {
@@ -191,7 +191,7 @@
     "bifrost-anthropic": {
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://rock-3a:8080/v1",
+        "baseURL": "https://bifrost.hackinblack.es/v1",
         "apiKey": "dummy"
       },
       "models": {
