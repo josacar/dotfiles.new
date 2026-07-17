@@ -12,6 +12,18 @@
       "api_key": "dummy",
       "models": [
         {
+          "id": "opencode-go/grok-4.5",
+          "name": "Grok 4.5",
+          "cost_per_1m_in": 2.0,
+          "cost_per_1m_out": 6.0,
+          "cost_per_1m_in_cached": 0.5,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 500000,
+          "default_max_tokens": 16384,
+          "can_reason": true,
+          "supports_attachments": true
+        },
+        {
           "id": "opencode-go/glm-5.2",
           "name": "GLM-5.2",
           "cost_per_1m_in": 1.4,
@@ -81,6 +93,18 @@
           "context_window": 262144,
           "default_max_tokens": 16384,
           "can_reason": false,
+          "supports_attachments": true
+        },
+        {
+          "id": "opencode-go/kimi-k3",
+          "name": "Kimi K3",
+          "cost_per_1m_in": 3.0,
+          "cost_per_1m_out": 15.0,
+          "cost_per_1m_in_cached": 0.3,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 1048576,
+          "default_max_tokens": 16384,
+          "can_reason": true,
           "supports_attachments": true
         },
         {
