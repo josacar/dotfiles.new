@@ -1,7 +1,7 @@
 {
   "models": {
     "large": {
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go-openai/deepseek-v4-flash",
       "provider": "bifrost"
     }
   },
@@ -12,7 +12,7 @@
       "api_key": "dummy",
       "models": [
         {
-          "id": "opencode-go/grok-4.5",
+          "id": "opencode-go-openai/grok-4.5",
           "name": "Grok 4.5",
           "cost_per_1m_in": 2.0,
           "cost_per_1m_out": 6.0,
@@ -24,7 +24,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/glm-5.2",
+          "id": "opencode-go-openai/glm-5.2",
           "name": "GLM-5.2",
           "cost_per_1m_in": 1.4,
           "cost_per_1m_out": 4.4,
@@ -36,7 +36,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/glm-5.1",
+          "id": "opencode-go-openai/glm-5.1",
           "name": "GLM-5.1",
           "cost_per_1m_in": 1.4,
           "cost_per_1m_out": 4.4,
@@ -48,7 +48,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/glm-5",
+          "id": "opencode-go-openai/glm-5",
           "name": "GLM-5",
           "cost_per_1m_in": 1.0,
           "cost_per_1m_out": 3.2,
@@ -60,7 +60,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/kimi-k2.5",
+          "id": "opencode-go-openai/kimi-k2.5",
           "name": "Kimi K2.5",
           "cost_per_1m_in": 0.4,
           "cost_per_1m_out": 1.9,
@@ -72,7 +72,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/kimi-k2.6",
+          "id": "opencode-go-openai/kimi-k2.6",
           "name": "Kimi K2.6",
           "cost_per_1m_in": 0.95,
           "cost_per_1m_out": 4.0,
@@ -84,7 +84,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/kimi-k2.7-code",
+          "id": "opencode-go-openai/kimi-k2.7-code",
           "name": "Kimi K2.7 Code",
           "cost_per_1m_in": 0.95,
           "cost_per_1m_out": 4.0,
@@ -96,7 +96,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/kimi-k3",
+          "id": "opencode-go-openai/kimi-k3",
           "name": "Kimi K3",
           "cost_per_1m_in": 3.0,
           "cost_per_1m_out": 15.0,
@@ -108,7 +108,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/deepseek-v4-pro",
+          "id": "opencode-go-openai/deepseek-v4-pro",
           "name": "DeepSeek V4 Pro",
           "cost_per_1m_in": 1.74,
           "cost_per_1m_out": 3.48,
@@ -120,7 +120,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/deepseek-v4-flash",
+          "id": "opencode-go-openai/deepseek-v4-flash",
           "name": "DeepSeek V4 Flash",
           "cost_per_1m_in": 0.14,
           "cost_per_1m_out": 0.28,
@@ -132,7 +132,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/mimo-v2.5",
+          "id": "opencode-go-openai/mimo-v2.5",
           "name": "MiMo V2.5",
           "cost_per_1m_in": 0.14,
           "cost_per_1m_out": 0.28,
@@ -144,7 +144,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/mimo-v2.5-pro",
+          "id": "opencode-go-openai/mimo-v2.5-pro",
           "name": "MiMo V2.5 Pro",
           "cost_per_1m_in": 1.74,
           "cost_per_1m_out": 3.48,
@@ -156,7 +156,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/mimo-v2-pro",
+          "id": "opencode-go-openai/mimo-v2-pro",
           "name": "MiMo V2 Pro",
           "cost_per_1m_in": 1.0,
           "cost_per_1m_out": 3.0,
@@ -168,7 +168,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/mimo-v2-omni",
+          "id": "opencode-go-openai/mimo-v2-omni",
           "name": "MiMo V2 Omni",
           "cost_per_1m_in": 0.4,
           "cost_per_1m_out": 2.0,
@@ -180,7 +180,7 @@
           "supports_attachments": true
         },
         {
-          "id": "opencode-go/hy3-preview",
+          "id": "opencode-go-openai/hy3-preview",
           "name": "HY3 Preview",
           "cost_per_1m_in": 0.1,
           "cost_per_1m_out": 0.3,

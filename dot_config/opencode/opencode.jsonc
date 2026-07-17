@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "bifrost/opencode-go/deepseek-v4-flash",
+  "model": "bifrost/opencode-go-openai/deepseek-v4-flash",
   "provider": {
     "bifrost": {
       "npm": "@ai-sdk/openai-compatible",
@@ -9,7 +9,7 @@
         "apiKey": "dummy"
       },
       "models": {
-        "opencode-go/grok-4.5": {
+        "opencode-go-openai/grok-4.5": {
           "name": "Grok 4.5",
           "family": "grok",
           "status": "active",
@@ -18,7 +18,7 @@
           "limit": { "context": 500000, "output": 500000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] }
         },
-        "opencode-go/glm-5.2": {
+        "opencode-go-openai/glm-5.2": {
           "name": "GLM-5.2",
           "family": "glm",
           "status": "active",
@@ -28,7 +28,7 @@
           "limit": { "context": 202752, "output": 32768 },
           "modalities": { "input": ["text"], "output": ["text"] }
         },
-        "opencode-go/glm-5.1": {
+        "opencode-go-openai/glm-5.1": {
           "name": "GLM-5.1",
           "family": "glm",
           "status": "active",
@@ -38,7 +38,7 @@
           "limit": { "context": 202752, "output": 32768 },
           "modalities": { "input": ["text"], "output": ["text"] }
         },
-        "opencode-go/glm-5": {
+        "opencode-go-openai/glm-5": {
           "name": "GLM-5",
           "family": "glm",
           "status": "active",
@@ -48,7 +48,7 @@
           "limit": { "context": 202752, "output": 32768 },
           "modalities": { "input": ["text"], "output": ["text"] }
         },
-        "opencode-go/kimi-k2.5": {
+        "opencode-go-openai/kimi-k2.5": {
           "name": "Kimi K2.5",
           "family": "kimi",
           "status": "active",
@@ -58,7 +58,7 @@
           "limit": { "context": 262144, "output": 65536 },
           "modalities": { "input": ["text", "image"], "output": ["text"] }
         },
-        "opencode-go/kimi-k2.6": {
+        "opencode-go-openai/kimi-k2.6": {
           "name": "Kimi K2.6",
           "family": "kimi",
           "status": "active",
@@ -68,7 +68,7 @@
           "limit": { "context": 262144, "output": 65536 },
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] }
         },
-        "opencode-go/kimi-k2.7-code": {
+        "opencode-go-openai/kimi-k2.7-code": {
           "name": "Kimi K2.7 Code",
           "family": "kimi",
           "status": "active",
@@ -78,7 +78,7 @@
           "limit": { "context": 262144, "output": 65536 },
           "modalities": { "input": ["text", "image"], "output": ["text"] }
         },
-        "opencode-go/kimi-k3": {
+        "opencode-go-openai/kimi-k3": {
           "name": "Kimi K3",
           "family": "kimi",
           "status": "active",
@@ -88,7 +88,7 @@
           "limit": { "context": 1048576, "output": 131072 },
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] }
         },
-        "opencode-go/deepseek-v4-pro": {
+        "opencode-go-openai/deepseek-v4-pro": {
           "name": "DeepSeek V4 Pro",
           "family": "deepseek",
           "status": "active",
@@ -98,7 +98,7 @@
           "limit": { "context": 1000000, "output": 384000 },
           "modalities": { "input": ["text"], "output": ["text"] }
         },
-        "opencode-go/deepseek-v4-flash": {
+        "opencode-go-openai/deepseek-v4-flash": {
           "name": "DeepSeek V4 Flash",
           "family": "deepseek",
           "status": "active",
@@ -108,7 +108,7 @@
           "limit": { "context": 1000000, "output": 384000 },
           "modalities": { "input": ["text"], "output": ["text"] }
         },
-        "opencode-go/mimo-v2.5": {
+        "opencode-go-openai/mimo-v2.5": {
           "name": "MiMo V2.5",
           "family": "mimo-v2.5",
           "status": "active",
@@ -118,7 +118,7 @@
           "limit": { "context": 1000000, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] }
         },
-        "opencode-go/mimo-v2.5-pro": {
+        "opencode-go-openai/mimo-v2.5-pro": {
           "name": "MiMo V2.5 Pro",
           "family": "mimo-v2.5-pro",
           "status": "active",
@@ -128,7 +128,7 @@
           "limit": { "context": 1048576, "output": 128000 },
           "modalities": { "input": ["text", "image"], "output": ["text"] }
         },
-        "opencode-go/mimo-v2-pro": {
+        "opencode-go-openai/mimo-v2-pro": {
           "name": "MiMo V2 Pro",
           "family": "mimo-v2-pro",
           "status": "active",
@@ -138,7 +138,7 @@
           "limit": { "context": 1048576, "output": 128000 },
           "modalities": { "input": ["text"], "output": ["text"] }
         },
-        "opencode-go/mimo-v2-omni": {
+        "opencode-go-openai/mimo-v2-omni": {
           "name": "MiMo V2 Omni",
           "family": "mimo-v2-omni",
           "status": "active",
@@ -148,7 +148,7 @@
           "limit": { "context": 262144, "output": 128000 },
           "modalities": { "input": ["text", "image", "audio", "pdf"], "output": ["text"] }
         },
-        "opencode-go/hy3-preview": {
+        "opencode-go-openai/hy3-preview": {
           "name": "HY3 Preview",
           "family": "hy3",
           "status": "active",
