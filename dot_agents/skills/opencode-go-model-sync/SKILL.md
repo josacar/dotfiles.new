@@ -1,11 +1,11 @@
 ---
 name: opencode-go-model-sync
-description: Synchronizes OpenCode Go model lists with the local opencode client config, crush config, and the local bifrost proxy config on rock-3a. Use when the user asks to update opencode models, add new OpenCode Go models, refresh model lists, or keep configs in sync with upstream.
+description: Synchronizes OpenCode Go model lists and per-model USD/token pricing with the local opencode client config, crush config, and the local bifrost proxy config on rock-3a. Use when the user asks to update opencode models, add new OpenCode Go models, refresh model lists, keep model costs in sync across configs, or re-sync after upstream price changes.
 ---
 
 # OpenCode Go Model Sync
 
-This skill synchronizes the model lists from the OpenCode Go API with three local configs:
+This skill synchronizes the model lists **and** per-model pricing from the OpenCode Go API with three local configs:
 
 1. `dot_config/opencode/opencode.jsonc` in the chezmoi dotfiles repo (`~/.local/share/chezmoi`)
 2. `dot_config/crush/crush.json` in the chezmoi dotfiles repo (`~/.local/share/chezmoi`)
@@ -18,7 +18,9 @@ Use this skill when the user:
 - Asks to "update opencode models"
 - Asks to "add new models" from OpenCode Go
 - Wants to sync the local bifrost proxy model list
+- Wants to sync model costs/pricing across opencode, crush, and bifrost
 - Mentions new models appeared on `https://opencode.ai/zen/go/v1/models`
+- Mentions an upstream price change to a known model
 - Wants crush config kept in sync
 - Wants all three configs kept in sync
 
@@ -26,6 +28,7 @@ Use this skill when the user:
 
 - **Model list API**: `https://opencode.ai/zen/go/v1/models`
 - **Pricing/docs**: `https://opencode.ai/docs/go`
+- **Bifrost config schema**: `https://www.getbifrost.ai/schema` — see the `$defs.provider_pricing_override` definition for the `governance.pricing_overrides` schema. The supported `pricing_patch` fields are documented at `https://docs.getbifrost.ai/providers/custom-pricing`.
 
 ## Files to Update
 
@@ -33,7 +36,7 @@ Use this skill when the user:
 |------|------|---------|
 | `dot_config/opencode/opencode.jsonc` | `~/.local/share/chezmoi` | OpenCode client provider/model definitions |
 | `dot_config/crush/crush.json` | `~/.local/share/chezmoi` | Crush provider/model definitions |
-| `files/bifrost-config.json` | `~/code/rock-3a` | Bifrost proxy allowed-model lists per provider |
+| `files/bifrost-config.json` | `~/code/rock-3a` | Bifrost proxy allowed-model lists (`providers.<provider>.keys[].models`) AND per-model USD/token pricing (`governance.pricing_overrides`) |
 
 ## Step-by-Step Workflow
 
@@ -86,11 +89,73 @@ Edit `files/bifrost-config.json` in `~/code/rock-3a`:
 - Add the new model ID to the `models` array of the matching provider under `providers.<provider>.keys[0].models`.
 - Keep the array in the same order as the OpenCode client config when possible.
 
-### 6. Validate JSON/JSONC
+### 6. Add the Model's Cost to the Bifrost Pricing Overrides
+
+Bifrost tracks per-model cost in `governance.pricing_overrides` (top-level key in the same `files/bifrost-config.json`) — **not** in the `providers.<provider>.keys[].models` array, which only carries allowed-model IDs.
+
+The override schema is `provider_pricing_override` from `https://www.getbifrost.ai/schema`. Required fields:
+
+- `id` — stable, unique string. Use `<provider>-<model-slug>-pricing` (e.g. `opencode-go-glm-5.2-pricing`).
+- `name` — human label, mirroring the model name from the opencode.jsonc entry.
+- `scope_kind` — `provider` for these models (cost is per-provider, not per-virtual-key).
+- `provider_id` — matches the bifrost provider key (`opencode-go`, `opencode-go-anthropic`, `opencode-go-free`).
+- `match_type` — `exact` (we pin each model individually).
+- `pattern` — the bare model ID **without** the provider prefix (e.g. `glm-5.2`, not `opencode-go/glm-5.2`). This matches the value sent on the wire to bifrost.
+- `request_types` — `["chat_completion"]` (covers both stream and non-stream; the per-stream request type is not in the enum).
+- `pricing_patch` — a **JSON-encoded string** (not a nested object) of cost fields expressed as **USD per token**, not USD per million tokens. The crush config stores costs per 1M tokens, so divide by `1_000_000` when writing the patch.
+
+  Field mapping from the crush entry:
+
+  | Crush field (per 1M)        | `pricing_patch` field (per token) |
+  |-----------------------------|-----------------------------------|
+  | `cost_per_1m_in`             | `input_cost_per_token`            |
+  | `cost_per_1m_out`            | `output_cost_per_token`           |
+  | `cost_per_1m_in_cached`     | `cache_read_input_token_cost`     |
+  | `cost_per_1m_out_cached`    | *(no equivalent in the public patch schema — omit)* |
+
+  Only include `cache_read_input_token_cost` when the value is non-zero; per the schema *"only fields with non-zero values are applied."*
+
+Example entry added for GLM-5.2 in `governance.pricing_overrides`:
+
+```json
+{
+  "id": "opencode-go-glm-5.2-pricing",
+  "name": "GLM-5.2 pricing",
+  "scope_kind": "provider",
+  "provider_id": "opencode-go",
+  "match_type": "exact",
+  "pattern": "glm-5.2",
+  "request_types": ["chat_completion"],
+  "pricing_patch": "{\"input_cost_per_token\":0.0000014,\"output_cost_per_token\":0.0000044,\"cache_read_input_token_cost\":0.00000026}"
+}
+```
+
+#### Handling free models
+
+Free models have all costs set to `0`. Because the Bifrost pricing patch *"only applies non-zero values,"* a zero-cost override is a no-op — **skip these models entirely**; do not add an entry to `governance.pricing_overrides`. They still need to be added to `providers.opencode-go-free.keys[0].models` (step 5).
+
+#### Keeping pricing in sync when costs change
+
+If the cost of an existing model changes upstream (e.g. GLM-5.2 input drops from $1.4 to $1.2 per 1M):
+
+1. Update `dot_config/opencode/opencode.jsonc` — edit the existing entry's `cost` block.
+2. Update `dot_config/crush/crush.json` — edit the existing entry's `cost_per_1m_*` fields.
+3. Update `files/bifrost-config.json` — find the matching entry in `governance.pricing_overrides` by `pattern` (the bare model ID) and rewrite its `pricing_patch` string.
+
+The pattern+provider pair is the lookup key; do **not** create a second override for the same model.
+
+### 7. Validate JSON/JSONC
 
 Verify all files remain valid (opencode.jsonc is JSON with comments; crush.json and bifrost-config.json are strict JSON).
 
-### 7. Commit and Push the Repos
+For `bifrost-config.json`, validate `governance.pricing_overrides` entries against the `provider_pricing_override` definition in `https://www.getbifrost.ai/schema`:
+
+- Every required field is present: `id`, `name`, `scope_kind`, `match_type`, `pattern`, `request_types`.
+- `scope_kind: "provider"` entries include `provider_id`.
+- `pricing_patch` is a *string* that parses as JSON; values are USD per token (not per 1M).
+- IDs are unique; `pattern` matches exactly one model in the crush config.
+
+### 8. Commit and Push the Repos
 
 For each repo, in order:
 
@@ -136,13 +201,31 @@ For each repo, in order:
 ```
 
 4. Add `"glm-5.2"` to `providers.opencode-go.keys[0].models` in `files/bifrost-config.json`.
-5. Commit and push both repos.
+5. Add a pricing override to `governance.pricing_overrides` in the same file:
+
+```json
+{
+  "id": "opencode-go-glm-5.2-pricing",
+  "name": "GLM-5.2 pricing",
+  "scope_kind": "provider",
+  "provider_id": "opencode-go",
+  "match_type": "exact",
+  "pattern": "glm-5.2",
+  "request_types": ["chat_completion"],
+  "pricing_patch": "{\"input_cost_per_token\":0.0000014,\"output_cost_per_token\":0.0000044,\"cache_read_input_token_cost\":0.00000026}"
+}
+```
+
+6. Validate all three files parse, then commit and push both repos.
 
 ## Common Pitfalls
 
 - **Do not** assume all models use the same endpoint. Always check the docs endpoint table.
 - **Do not** forget the crush config. It uses a different schema than opencode.jsonc.
-- **Do not** forget the bifrost proxy config. The client configs and proxy config must agree.
+- **Do not** forget the bifrost proxy config — both the `models` allow-list under `providers.<provider>.keys[0].models` AND the per-model cost under `governance.pricing_overrides`. The two live in the same `files/bifrost-config.json` but serve different purposes.
+- **Do not** store USD per million tokens in `pricing_patch` — the patch uses USD **per token**. Divide the crush `cost_per_1m_*` value by `1_000_000`.
+- **Do not** add `pricing_patch` overrides for free models — zero-value fields are skipped by bifrost and have no effect.
+- **Do not** create two overrides for the same model (one keyed by id, one by pattern). The pattern+provider pair is the lookup key.
 - **Do not** commit unrelated changes in either repo.
 - Free models are served from `https://opencode.ai/zen` (not `/zen/go`), so they belong to the `opencode-go-free` provider in bifrost.
 
