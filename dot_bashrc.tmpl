@@ -36,7 +36,7 @@
 {{ include "partials/bashrc/go.sh" -}}
 
 # bashrc/iterm
-{{- if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 {{ include "partials/bashrc/iterm.sh" -}}
 {{- end -}}
 
