@@ -157,6 +157,15 @@
           "limit": { "context": 262144, "output": 262144 },
           "modalities": { "input": ["text"], "output": ["text"] }
         },
+        "opencode-go-openai/hy3": {
+          "name": "HY3",
+          "family": "hy3",
+          "status": "active",
+          "reasoning": true,
+          "cost": { "input": 0.14, "output": 0.58, "cache_read": 0.035 },
+          "limit": { "context": 262144, "output": 262144 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
         "opencode-go-free/deepseek-v4-flash-free": {
           "name": "DeepSeek V4 Flash - Free",
           "family": "deepseek",
@@ -200,6 +209,38 @@
         "opencode-go-free/minimax-m3-free": {
           "name": "MiniMax M3 Free",
           "family": "minimax",
+          "status": "active",
+          "cost": { "input": 0, "output": 0, "cache_read": 0 },
+          "limit": { "context": 1000000, "output": 16384 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
+        "opencode-go-free/ling-3.0-flash-free": {
+          "name": "Ling 3.0 Flash Free",
+          "family": "ling-3.0",
+          "status": "active",
+          "cost": { "input": 0, "output": 0, "cache_read": 0 },
+          "limit": { "context": 1000000, "output": 16384 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
+        "opencode-go-free/ling-3.0-tiny-free": {
+          "name": "Ling 3.0 Tiny Free",
+          "family": "ling-3.0",
+          "status": "active",
+          "cost": { "input": 0, "output": 0, "cache_read": 0 },
+          "limit": { "context": 1000000, "output": 16384 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
+        "opencode-go-free/laguna-s-2.1-free": {
+          "name": "Laguna S 2.1 Free",
+          "family": "laguna-s-2.1",
+          "status": "active",
+          "cost": { "input": 0, "output": 0, "cache_read": 0 },
+          "limit": { "context": 1000000, "output": 16384 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
+        "opencode-go-free/longcat-2.0-free": {
+          "name": "Longcat 2.0 Free",
+          "family": "longcat-2.0",
           "status": "active",
           "cost": { "input": 0, "output": 0, "cache_read": 0 },
           "limit": { "context": 1000000, "output": 16384 },
@@ -281,6 +322,33 @@
           "reasoning": true,
           "cost": { "input": 2.5, "output": 7.5, "cache_read": 0.5 },
           "limit": { "context": 1000000, "output": 65536 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
+        "opencode-go-anthropic/qwen3.8-max": {
+          "name": "Qwen3.8 Max",
+          "family": "qwen3.8-max",
+          "status": "active",
+          "reasoning": true,
+          "cost": { "input": 2, "output": 6, "cache_read": 0.25 },
+          "limit": { "context": 1000000, "output": 65536 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        }
+      }
+    },
+    "bifrost-responses": {
+      "npm": "@ai-sdk/openai",
+      "options": {
+        "baseURL": "https://bifrost.hackinblack.es/v1",
+        "apiKey": "dummy"
+      },
+      "models": {
+        "opencode-go-openai/gpt-5.6-luna": {
+          "name": "GPT 5.6 Luna",
+          "family": "gpt",
+          "status": "active",
+          "reasoning": true,
+          "cost": { "input": 0.2, "output": 1.2, "cache_read": 0.02 },
+          "limit": { "context": 272000, "output": 32768 },
           "modalities": { "input": ["text"], "output": ["text"] }
         }
       }
