@@ -5,6 +5,14 @@
   email = {{ .email | quote }}
   name = {{ .name | quote }}
   signingkey = "{{ if .work }}~/.ssh/curro{{ else }}~/.ssh/personal{{ end }}"
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+  path = ~/.config/git/identity-github
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+  path = ~/.config/git/identity-github
+[includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
+  path = ~/.config/git/identity-gitlab
+[includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
+  path = ~/.config/git/identity-gitlab
 [gpg]
   format = ssh
 [github]

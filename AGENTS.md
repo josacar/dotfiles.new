@@ -188,6 +188,7 @@ Templated with `.name`, `.email`, `.signingkey` from init prompts. Key settings:
 - `core.pager = less -FRSX`
 - Git aliases (many)
 - `difftool = vimdiff`, `mergetool = vimdiff`
+- **Per-host identity via `includeIf "hasconfig:remote.*.url:..."`**: global `[user]` (from init prompts) is the fallback; four `includeIf` rules in `identity-github` / `identity-gitlab` override it for repos whose remote matches. Github remote → `josacar@users.noreply.github.com`; Gitlab remote → `1990502-josacar@users.noreply.gitlab.com`. Patterns must anchor both the `user@host:` scheme and the path: ssh is `git@github.com:*/**`, https is `https://github.com/**` (git's wildmatch `**` only crosses `/` when preceded by `/` or at pattern start — a bare `*github.com*` will NOT match).
 
 ---
 
