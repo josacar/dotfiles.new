@@ -28,6 +28,16 @@
           "limit": { "context": 202752, "output": 32768 },
           "modalities": { "input": ["text"], "output": ["text"] }
         },
+        "opencode-go-openai/glm-5.3-flash": {
+          "name": "GLM-5.3-Flash",
+          "family": "glm",
+          "status": "active",
+          "reasoning": true,
+          "interleaved": { "field": "reasoning_content" },
+          "cost": { "input": 0.15, "output": 0.5, "cache_read": 0.03 },
+          "limit": { "context": 1000000, "output": 131072 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
         "opencode-go-openai/glm-5.2": {
           "name": "GLM-5.2",
           "family": "glm",
@@ -98,6 +108,16 @@
           "limit": { "context": 1048576, "output": 131072 },
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] }
         },
+        "opencode-go-openai/longcat-2.0": {
+          "name": "LongCat-2.0",
+          "family": "longcat",
+          "status": "active",
+          "reasoning": true,
+          "interleaved": { "field": "reasoning_content" },
+          "cost": { "input": 0.3, "output": 1.2, "cache_read": 0.006 },
+          "limit": { "context": 1000000, "output": 131072 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
         "opencode-go-openai/deepseek-v4-pro": {
           "name": "DeepSeek V4 Pro",
           "family": "deepseek",
@@ -117,6 +137,16 @@
           "cost": { "input": 0.44, "output": 1.32, "cache_read": 0.014 },
           "limit": { "context": 1000000, "output": 384000 },
           "modalities": { "input": ["text"], "output": ["text"] }
+        },
+        "opencode-go-openai/deepseek-v4-flash-vision-exp": {
+          "name": "DeepSeek V4 Flash Vision Exp",
+          "family": "deepseek",
+          "status": "active",
+          "reasoning": true,
+          "interleaved": { "field": "reasoning_content" },
+          "cost": { "input": 0.44, "output": 1.32, "cache_read": 0.014 },
+          "limit": { "context": 1000000, "output": 384000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
         },
         "opencode-go-openai/mimo-v2.5": {
           "name": "MiMo V2.5",
@@ -335,6 +365,24 @@
           "reasoning": true,
           "cost": { "input": 0.2, "output": 1.2, "cache_read": 0.02 },
           "limit": { "context": 272000, "output": 32768 },
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
+        "opencode-go-openai/grok-4.6": {
+          "name": "Grok 4.6",
+          "family": "grok",
+          "status": "active",
+          "reasoning": true,
+          "cost": { "input": 2, "output": 6, "cache_read": 0.5 },
+          "limit": { "context": 500000, "output": 500000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "opencode-go-openai/muse-spark-1.2-contributor": {
+          "name": "Muse Spark 1.2 Contributor",
+          "family": "muse-spark",
+          "status": "active",
+          "reasoning": true,
+          "cost": { "input": 0.1, "output": 0.2, "cache_read": 0.002 },
+          "limit": { "context": 1048576, "output": 131072 },
           "modalities": { "input": ["text"], "output": ["text"] }
         }
       }

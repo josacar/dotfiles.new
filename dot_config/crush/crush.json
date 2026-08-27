@@ -24,6 +24,18 @@
           "supports_attachments": true
         },
         {
+          "id": "opencode-go-openai/grok-4.6",
+          "name": "Grok 4.6",
+          "cost_per_1m_in": 2.0,
+          "cost_per_1m_out": 6.0,
+          "cost_per_1m_in_cached": 0.5,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 500000,
+          "default_max_tokens": 16384,
+          "can_reason": true,
+          "supports_attachments": true
+        },
+        {
           "id": "opencode-go-openai/glm-5.3",
           "name": "GLM-5.3",
           "cost_per_1m_in": 1.4,
@@ -31,6 +43,18 @@
           "cost_per_1m_in_cached": 0.26,
           "cost_per_1m_out_cached": 0,
           "context_window": 203000,
+          "default_max_tokens": 16384,
+          "can_reason": true,
+          "supports_attachments": true
+        },
+        {
+          "id": "opencode-go-openai/glm-5.3-flash",
+          "name": "GLM-5.3-Flash",
+          "cost_per_1m_in": 0.15,
+          "cost_per_1m_out": 0.5,
+          "cost_per_1m_in_cached": 0.03,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 1000000,
           "default_max_tokens": 16384,
           "can_reason": true,
           "supports_attachments": true
@@ -120,6 +144,18 @@
           "supports_attachments": true
         },
         {
+          "id": "opencode-go-openai/longcat-2.0",
+          "name": "LongCat-2.0",
+          "cost_per_1m_in": 0.3,
+          "cost_per_1m_out": 1.2,
+          "cost_per_1m_in_cached": 0.006,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 1000000,
+          "default_max_tokens": 16384,
+          "can_reason": true,
+          "supports_attachments": true
+        },
+        {
           "id": "opencode-go-openai/deepseek-v4-pro",
           "name": "DeepSeek V4 Pro",
           "cost_per_1m_in": 1.32,
@@ -134,6 +170,18 @@
         {
           "id": "opencode-go-openai/deepseek-v4-flash",
           "name": "DeepSeek V4 Flash",
+          "cost_per_1m_in": 0.44,
+          "cost_per_1m_out": 1.32,
+          "cost_per_1m_in_cached": 0.014,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 1000000,
+          "default_max_tokens": 16384,
+          "can_reason": true,
+          "supports_attachments": true
+        },
+        {
+          "id": "opencode-go-openai/deepseek-v4-flash-vision-exp",
+          "name": "DeepSeek V4 Flash Vision Exp",
           "cost_per_1m_in": 0.44,
           "cost_per_1m_out": 1.32,
           "cost_per_1m_in_cached": 0.014,
@@ -223,6 +271,18 @@
           "cost_per_1m_in_cached": 0.02,
           "cost_per_1m_out_cached": 0,
           "context_window": 272000,
+          "default_max_tokens": 16384,
+          "can_reason": true,
+          "supports_attachments": true
+        },
+        {
+          "id": "opencode-go-openai/muse-spark-1.2-contributor",
+          "name": "Muse Spark 1.2 Contributor",
+          "cost_per_1m_in": 0.1,
+          "cost_per_1m_out": 0.2,
+          "cost_per_1m_in_cached": 0.002,
+          "cost_per_1m_out_cached": 0,
+          "context_window": 1048576,
           "default_max_tokens": 16384,
           "can_reason": true,
           "supports_attachments": true
